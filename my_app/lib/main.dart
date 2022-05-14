@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/constants/constant.dart';
+import 'package:my_app/views/bmi_data_screen.dart';
 
 void main() {
   runApp(const MyApp());
+  String greeting = "Hello Dart!";
+  String? greeting1;
 }
 
 class MyApp extends StatelessWidget {
@@ -11,21 +15,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Task Bootcamp'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: primaryColor,
+          scaffoldBackgroundColor: primaryColor,
+          appBarTheme: AppBarTheme(
+            backgroundColor: primaryColor,
+          ),
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: BmiDataScreen());
   }
 }
 
@@ -49,6 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _name = "nadanssssss";
 
   void _incrementCounter() {
     setState(() {
@@ -59,6 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // Navigator()
   }
 
   @override
@@ -104,12 +120,25 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-              'Nada',
+              '$_name',
               style: Theme.of(context).textTheme.headline6,
             ),
             Column(
-              children: const [
-                Image(image: AssetImage('assets/images/img_flutter.png'))
+              children: [
+                //using local file
+                // Image(image: AssetImage('assets/images/img_flutter.png'))
+                //using internet file
+                Image.network(
+                  "https://yt3.ggpht.com/ytc/AKedOLRt1d4p7bPylasq_66BIC8-k3hkyVjJ2JICQITK=s900-c-k-c0x00ffffff-no-rj",
+                  fit: BoxFit.contain,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    return loadingProgress == null
+                        ? child
+                        : const LinearProgressIndicator(
+                            color: Colors.black12,
+                          );
+                  },
+                )
               ],
             )
           ],
