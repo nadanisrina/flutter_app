@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -12,9 +13,18 @@ class BmiDataScreen extends StatefulWidget {
 }
 
 class _BmiDataScreenState extends State<BmiDataScreen> {
+  //variables
   int height = 100;
   int weight = 50;
   int age = 20;
+  //function
+  double calculateBMI() {
+    double heightInMeter = height / 100;
+    num heightSquare = pow(heightInMeter, 2);
+    // print(heightSquare);
+    double result = weight / heightSquare;
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -224,9 +234,12 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           )),
           GestureDetector(
             onTap: () {
+              ;
               Navigator.of(context).push(MaterialPageRoute(
                 builder: ((context) {
-                  return BmiResultScreen();
+                  return BmiResultScreen(
+                    bmiResult: calculateBMI(),
+                  );
                 }),
               ));
             },

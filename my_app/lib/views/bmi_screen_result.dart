@@ -3,8 +3,8 @@ import 'package:my_app/constants/constant.dart';
 import 'package:my_app/views/bmi_data_screen.dart';
 
 class BmiResultScreen extends StatelessWidget {
-  const BmiResultScreen({Key? key}) : super(key: key);
-
+  const BmiResultScreen({Key? key, required this.bmiResult}) : super(key: key);
+  final double bmiResult;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,7 @@ class BmiResultScreen extends StatelessWidget {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.green[800])),
-                      Text("18.3",
+                      Text("${bmiResult.toStringAsFixed(1)}",
                           style: TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.bold,
