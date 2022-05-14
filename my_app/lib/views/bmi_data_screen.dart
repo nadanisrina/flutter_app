@@ -104,12 +104,25 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       style: labelTextStyle!
                           .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "$weight",
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: primaryColor),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "$weight",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: primaryColor),
+                        ),
+                        Text(
+                          "kg",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: primaryColor),
+                        )
+                      ],
                     ),
                     SizedBox(height: 8),
                     Row(
