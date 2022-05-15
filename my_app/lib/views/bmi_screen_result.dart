@@ -1,10 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/constants/constant.dart';
+import 'package:my_app/constants/constant.dart' as constants;
 import 'package:my_app/views/bmi_data_screen.dart';
 
 class BmiResultScreen extends StatelessWidget {
   const BmiResultScreen({Key? key, required this.bmiResult}) : super(key: key);
   final double bmiResult;
+  //function
+  String getHealthRiskDescription(String category) {
+    String desc = "";
+    switch (category) {
+      case constants.underSevere:
+        desc = "Possible nutritional deficiency and osteoporosis.";
+        break;
+      case constants.underModerate:
+        desc = "Possible nutritional deficiency and osteoporosis.";
+        break;
+      case constants.underMild:
+        desc = "Possible nutritional deficiency and osteoporosis.";
+        break;
+      case constants.normal:
+        desc = "Low Risk (healthy range).";
+        break;
+      case constants.over:
+        desc = "Moderate risk of developing heart disease, high blood pressure";
+        break;
+      case constants.obesityI:
+        desc = "Moderate risk of developing heart disease, high blood pressure";
+        break;
+      case constants.obesityII:
+        desc = "Moderate risk of developing heart disease, high blood pressure";
+        break;
+      case constants.obesityIII:
+        desc = "Moderate risk of developing heart disease, high blood pressure";
+        break;
+      default:
+    }
+    return desc;
+  }
+
+  String getCategory(double bmiValue) {
+    String category = "";
+    if (bmiValue < 16.0) {
+      category = constants.underSevere;
+    } else if (bmiValue < 17.0) {
+      category = constants.underModerate;
+    } else if (bmiValue < 18.5) {
+      category = constants.underMild;
+    } else if (bmiValue < 25) {
+      category = constants.normal;
+    } else if (bmiValue < 30) {
+      category = constants.over;
+    } else if (bmiValue < 35) {
+      category = constants.obesityI;
+    } else if (bmiValue < 40) {
+      category = constants.obesityII;
+    } else if (bmiValue >= 40) {
+      category = constants.obesityIII;
+    }
+    return category;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +89,7 @@ class BmiResultScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Normal",
+                      Text(getCategory(bmiResult),
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -43,10 +98,11 @@ class BmiResultScreen extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.bold,
-                              color: primaryColor)),
-                      Text("Your BMI result is quite low, you should eat more!",
+                              color: constants.primaryColor)),
+                      Text(getHealthRiskDescription(getCategory(bmiResult)),
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 15, color: primaryColor)),
+                          style: TextStyle(
+                              fontSize: 15, color: constants.primaryColor)),
                     ],
                   ),
                 ),
@@ -57,7 +113,7 @@ class BmiResultScreen extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffec3c66),
+                  color: constants.ternaryColor,
                   borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
               height: 50,

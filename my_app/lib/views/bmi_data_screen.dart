@@ -17,6 +17,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   int height = 100;
   int weight = 50;
   int age = 20;
+  String? gender;
   //function
   double calculateBMI() {
     double heightInMeter = height / 100;
@@ -37,15 +38,31 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         children: [
           Expanded(
               child: Row(
-            children: const [
+            children: [
               Expanded(
-                child: BmiCard(
-                  child: GenderIconText(title: "Male", icon: Icons.male),
+                child: GestureDetector(
+                  onTap: () {
+                    gender = "male";
+                    setState(() {});
+                  },
+                  child: BmiCard(
+                    borderColor:
+                        (gender == "male") ? ternaryColor : secondaryColor,
+                    child: GenderIconText(title: "Male", icon: Icons.male),
+                  ),
                 ),
               ),
               Expanded(
-                child: BmiCard(
-                  child: GenderIconText(title: "Female", icon: Icons.female),
+                child: GestureDetector(
+                  onTap: () {
+                    gender = "female";
+                    setState(() {});
+                  },
+                  child: BmiCard(
+                    borderColor:
+                        (gender == "female") ? ternaryColor : secondaryColor,
+                    child: GenderIconText(title: "Female", icon: Icons.female),
+                  ),
                 ),
               ),
             ],
@@ -245,8 +262,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffec3c66),
-                  borderRadius: BorderRadius.circular(10)),
+                  color: ternaryColor, borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
               height: 50,
               child: const Center(
@@ -267,18 +283,18 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
 
 /*explain: return box */
 class BmiCard extends StatelessWidget {
-  const BmiCard({
-    Key? key,
-    this.child,
-  }) : super(key: key);
+  const BmiCard({Key? key, this.child, this.borderColor = secondaryColor})
+      : super(key: key);
 
   final Widget? child;
-
+  final Color? borderColor;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: secondaryColor, borderRadius: BorderRadius.circular(10)),
+          border: Border.all(width: 1.0, color: borderColor!),
+          color: secondaryColor,
+          borderRadius: BorderRadius.circular(10)),
       margin: const EdgeInsets.all(10),
       child: child,
     );
