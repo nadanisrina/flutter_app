@@ -149,7 +149,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            weight += 1;
+                            setState(() {});
+                          },
                           elevation: 0,
                           child: Icon(
                             Icons.add,
@@ -164,7 +167,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           width: 10,
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            weight -= 1;
+                            setState(() {});
+                          },
                           elevation: 0,
                           child: Icon(
                             Icons.remove,
@@ -250,7 +256,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: ((context) {
                   return BmiResultScreen(
-                    bmiResult: bmiCalculator.bmi!,
+                    bmiResult: bmiCalculator.bmi,
                   );
                 }),
               ));

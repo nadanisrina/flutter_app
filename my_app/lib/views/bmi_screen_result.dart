@@ -41,12 +41,12 @@ class BmiResultScreen extends StatelessWidget {
                     children: [
                       Text(
                           bmiCalculator
-                              .bmiCategory!, // karena di deklarasi boleh null, maka harus kasih !
+                              .bmiCategory, // karena di deklarasi boleh null, maka harus kasih !
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.green[800])),
-                      Text("${bmiResult.toStringAsFixed(1)}",
+                      Text(bmiResult.toStringAsFixed(1),
                           style: TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.bold,
